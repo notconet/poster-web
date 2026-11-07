@@ -1,0 +1,29 @@
+name: poster-dev
+
+services:
+  web:
+    build:
+      context: .
+    restart: unless-stopped
+
+    environment:
+      VITE_API_BASE_URL: /api
+
+    ports: 
+      - 5173:5173
+
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /app/src
+        - action: sync
+          path: ./public
+          target: /app/public
+        - action: sync
+          path: ./index.html
+          target: /app/index.html
+        - action: sync
+          path: ./vite.config.ts
+          target: /app/vite.config.ts
+
